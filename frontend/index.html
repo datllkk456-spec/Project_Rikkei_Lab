@@ -1,396 +1,63 @@
-
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>JobConnect — Cơ hội mới mỗi ngày</title>
-
-    <link rel="stylesheet" href="style.css">
-</head>
-
+<!doctype html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JobConnect — Cơ hội mới mỗi ngày</title><link rel="stylesheet" href="style.css"></head>
 <body>
-
-    <!-- HEADER -->
-    <header>
-        <a class="brand" href="#jobs">
-            ▣ JobConnect
-            <span>CAREER PLATFORM</span>
-        </a>
-
-        <nav aria-label="Điều hướng chính">
-            <button data-page="jobs">
-                Tìm việc làm
-            </button>
-
-            <button data-page="saved">
-                Việc đã lưu
-                <b id="savedCount">0</b>
-            </button>
-
-            <button data-page="applications">
-                Đơn ứng tuyển
-            </button>
-
-            <button data-page="cv">
-                Hồ sơ & CV
-            </button>
-        </nav>
-
-        <button id="account">
-            Đăng nhập
-        </button>
-    </header>
-
-    <!-- MAIN -->
-    <main>
-
-        <!-- HERO SECTION -->
-        <section id="hero">
-
-            <span class="eyebrow">
-                BƯỚC TIẾP THEO TRONG SỰ NGHIỆP
-            </span>
-
-            <h1>
-                Công việc phù hợp.<br>
-                <em>Tương lai rộng mở.</em>
-            </h1>
-
-            <p>
-                Kết nối với những cơ hội mới
-                và tìm nơi bạn có thể phát triển.
-            </p>
-
-            <!-- SEARCH FORM -->
-            <form id="search">
-
-                <label>
-                    Từ khóa
-
-                    <input
-                        id="keyword"
-                        placeholder="Vị trí, công ty, kỹ năng…"
-                    >
-                </label>
-
-                <label>
-                    Địa điểm
-
-                    <select id="location">
-                        <option value="">
-                            Tất cả địa điểm
-                        </option>
-
-                        <option>TP. Hồ Chí Minh</option>
-                        <option>Đà Nẵng</option>
-                        <option>Hà Nội</option>
-                    </select>
-                </label>
-
-                <button class="primary">
-                    Tìm kiếm →
-                </button>
-
-            </form>
-
-            <!-- TRENDING KEYWORDS -->
-            <div class="trending">
-                Gợi ý:
-
-                <button data-key="Frontend">
-                    Frontend
-                </button>
-
-                <button data-key="Designer">
-                    Designer
-                </button>
-
-                <button data-key="Marketing">
-                    Marketing
-                </button>
-            </div>
-
-        </section>
-
-        <!-- WORKSPACE -->
-        <section id="workspace">
-
-            <!-- SECTION HEADER -->
-            <div class="section-head">
-
-                <div>
-                    <span class="eyebrow">
-                        KHÁM PHÁ CƠ HỘI
-                    </span>
-
-                    <h2 id="pageTitle">
-                        Việc làm mới nhất
-                    </h2>
-                </div>
-
-                <span id="resultCount"></span>
-
-            </div>
-
-            <!-- JOBS VIEW -->
-            <div id="jobsView" class="listing">
-
-                <!-- FILTER SIDEBAR -->
-                <aside>
-
-                    <h3>Lọc công việc</h3>
-
-                    <label>
-                        Hình thức
-
-                        <select id="type">
-                            <option value="">Tất cả</option>
-                            <option>Toàn thời gian</option>
-                            <option>Bán thời gian</option>
-                            <option>Thực tập</option>
-                        </select>
-                    </label>
-
-                    <label>
-                        Mức lương tối thiểu (triệu)
-
-                        <input
-                            id="salary"
-                            type="number"
-                            min="0"
-                            max="200"
-                            value="0"
-                        >
-                    </label>
-
-                    <label>
-                        Sắp xếp
-
-                        <select id="sort">
-                            <option value="new">
-                                Mới nhất
-                            </option>
-
-                            <option value="salary">
-                                Lương cao nhất
-                            </option>
-                        </select>
-                    </label>
-
-                    <button id="reset">
-                        Đặt lại bộ lọc
-                    </button>
-
-                    <p class="muted">
-                        Một bước nhỏ hôm nay,<br>
-                        một cơ hội lớn ngày mai.
-                    </p>
-
-                </aside>
-
-                <!-- JOB LIST -->
-                <div id="jobList"></div>
-
-            </div>
-
-            <!-- APPLICATIONS VIEW -->
-            <div id="applicationsView" hidden>
-
-                <label>
-                    Lọc trạng thái
-
-                    <select id="statusFilter">
-                        <option value="">
-                            Tất cả trạng thái
-                        </option>
-                    </select>
-                </label>
-
-                <div id="applicationList"></div>
-
-            </div>
-
-            <!-- CV VIEW -->
-            <div id="cvView" hidden>
-
-                <div class="panel">
-
-                    <h3>CV của bạn</h3>
-
-                    <p>
-                        Tải lên CV dạng PDF,
-                        dung lượng tối đa 5 MB.
-                    </p>
-
-                    <label class="upload">
-                        Chọn file PDF
-
-                        <input
-                            type="file"
-                            id="cvInput"
-                            accept="application/pdf,.pdf"
-                        >
-                    </label>
-
-                    <div id="cvList"></div>
-
-                    <p class="muted">
-                        Bản demo lưu CV trong trình duyệt
-                        này bằng IndexedDB.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-        JobConnect © 2026
-
-        <span>
-            Kết nối tài năng. Mở lối tương lai.
-        </span>
-    </footer>
-
-    <!-- AUTH DIALOG -->
-    <dialog id="authDialog">
-
-        <form id="authForm">
-
-            <button
-                type="button"
-                class="close"
-                data-close
-            >
-                ×
-            </button>
-
-            <h2>Chào mừng bạn</h2>
-
-            <p>
-                Đăng nhập mô phỏng để trải nghiệm ứng viên.
-            </p>
-
-            <label>
-                Họ tên
-
-                <input
-                    id="name"
-                    required
-                    maxlength="80"
-                    autocomplete="name"
-                >
-            </label>
-
-            <label>
-                Email
-
-                <input
-                    id="email"
-                    type="email"
-                    required
-                    autocomplete="email"
-                >
-            </label>
-
-            <label>
-                Vai trò
-
-                <select id="role">
-                    <option value="Candidate">
-                        Ứng viên
-                    </option>
-
-                    <option value="Recruiter">
-                        Nhà tuyển dụng
-                    </option>
-                </select>
-            </label>
-
-            <p class="muted">
-                Không tạo tài khoản Admin
-                từ giao diện đăng ký.
-            </p>
-
-            <button class="primary">
-                Bắt đầu trải nghiệm
-            </button>
-
-        </form>
-
-    </dialog>
-
-    <!-- JOB DETAIL DIALOG -->
-    <dialog id="detailDialog">
-
-        <button class="close" data-close>
-            ×
-        </button>
-
-        <div id="detailBody"></div>
-
-    </dialog>
-
-    <!-- APPLY DIALOG -->
-    <dialog id="applyDialog">
-
-        <form id="applyForm">
-
-            <button
-                type="button"
-                class="close"
-                data-close
-            >
-                ×
-            </button>
-
-            <h2>Nộp đơn ứng tuyển</h2>
-
-            <p id="applyTitle"></p>
-
-            <label>
-                Chọn CV PDF
-
-                <select id="cvSelect" required>
-                </select>
-            </label>
-
-            <label>
-                Thư giới thiệu
-
-                <textarea
-                    id="letter"
-                    rows="5"
-                    maxlength="3000"
-                    placeholder="Chia sẻ lý do bạn phù hợp…"
-                ></textarea>
-            </label>
-
-            <button class="primary">
-                Gửi đơn ứng tuyển
-            </button>
-
-        </form>
-
-    </dialog>
-
-    <!-- TOAST NOTIFICATION -->
-    <div
-        id="toast"
-        role="status"
-        aria-live="polite"
-    ></div>
-
-    <!-- JAVASCRIPT -->
-    <script src="app.js"></script>
-
-</body>
-
-</html>
+<header><a class="brand" href="#/jobs">💼 JobConnect<span>CAREER PLATFORM</span></a>
+<nav aria-label="Điều hướng chính"><button data-page="jobs">Tìm việc làm</button><button data-page="saved">Việc đã lưu <b id="savedCount">0</b></button><button data-page="applications">Đơn ứng tuyển</button><button data-page="cv">Hồ sơ & CV</button><button data-portal="candidate-profile">Thông tin cá nhân</button><button data-portal="recruiter">Nhà tuyển dụng</button><button data-portal="admin">Quản trị</button></nav><div class="header-auth">
+  <button id="registerButton" type="button" class="header-register">Đăng ký</button>
+  <button id="account" type="button" class="header-login">Đăng nhập</button>
+  <div id="userMenu" class="user-menu" hidden>
+    <button id="userProfile" type="button" class="user-identity" title="Mở trang tài khoản">
+      <span id="userAvatar" class="user-avatar" aria-hidden="true">U</span>
+      <span class="user-meta"><span id="userName" class="user-name">Người dùng</span><span id="userRole" class="user-role">Ứng viên</span></span>
+    </button>
+    <button id="logoutButton" type="button" class="logout-button" title="Đăng xuất khỏi JobConnect">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      <span>Đăng xuất</span>
+    </button>
+  </div>
+</div></header>
+<main>
+<section id="hero" aria-label="Giới thiệu JobConnect">
+  <div class="hero-people" aria-hidden="true"><img src="images/hero-reference-people.jpg" alt="" /></div>
+  <div class="hero-copy">
+    <span class="eyebrow">BƯỚC TIẾP THEO TRONG SỰ NGHIỆP</span>
+    <h1>Công việc phù hợp.<br><em>Tương lai rộng mở.</em></h1>
+    <p>Kết nối ứng viên với những cơ hội việc làm chất lượng và tìm nơi bạn có thể phát triển.</p>
+    <form id="search" autocomplete="off">
+      <label><span class="search-label">Từ khóa</span><input id="keyword" placeholder="⌕  Tìm vị trí, kỹ năng hoặc công ty..." aria-label="Tìm vị trí, kỹ năng hoặc công ty"></label>
+      <label><span class="search-label">Địa điểm</span><select id="location" aria-label="Địa điểm"><option value="">⌖  Tất cả địa điểm</option><option>Hà Nội</option><option>TP. Hồ Chí Minh</option><option>Đà Nẵng</option><option>Hải Phòng</option><option>Cần Thơ</option><option>Huế</option><option>Nha Trang</option><option>Bình Dương</option><option>Đồng Nai</option><option>Bắc Ninh</option><option>Quảng Ninh</option><option>Nghệ An</option><option>Long An</option><option>Vũng Tàu</option><option>Đà Lạt</option><option>Phú Quốc</option><option>Biên Hòa</option><option>Remote</option></select></label>
+      <button class="primary" type="submit">⌕ &nbsp; Tìm việc ngay</button>
+    </form>
+  </div>
+</section>
+<section id="discovery" class="discovery" aria-label="Khám phá cơ hội">
+  <div class="trust-strip">
+    <div><span class="trust-icon">▣</span><strong>Việc làm mới</strong><small>Khám phá danh sách đang tuyển</small></div>
+    <div><span class="trust-icon">▦</span><strong>Doanh nghiệp</strong><small>Xem chi tiết và thông tin công ty</small></div>
+    <div><span class="trust-icon">♧</span><strong>Hồ sơ cá nhân</strong><small>Quản lý CV và ứng tuyển</small></div>
+    <div><span class="trust-icon">✓</span><strong>3 vai trò</strong><small>Ứng viên · Tuyển dụng · Admin</small></div>
+  </div>
+  <div class="explore-head"><h2>Khám phá theo lĩnh vực</h2><button type="button" class="text-link" id="showAllCategories">Xem tất cả →</button></div>
+  <div class="industry-grid">
+    <button class="industry-card" type="button" data-key="Frontend"><span class="industry-emoji">💻</span><strong>Công nghệ<br>thông tin</strong></button>
+    <button class="industry-card" type="button" data-key="Marketing"><span class="industry-emoji">📣</span><strong>Marketing<br>&amp; Truyền thông</strong></button>
+    <button class="industry-card" type="button" data-key="Digital"><span class="industry-emoji">📈</span><strong>Kinh doanh<br>&amp; Bán hàng</strong></button>
+    <button class="industry-card" type="button" data-key="Content"><span class="industry-emoji">👥</span><strong>Nhân sự<br>&amp; Hành chính</strong></button>
+    <button class="industry-card" type="button" data-key="Backend"><span class="industry-emoji">🪙</span><strong>Tài chính<br>&amp; Kế toán</strong></button>
+    <button class="industry-card" type="button" data-key="Designer"><span class="industry-emoji">🎨</span><strong>Thiết kế<br>&amp; Sáng tạo</strong></button>
+    <button class="industry-card" type="button" data-key="Intern"><span class="industry-emoji">🎓</span><strong>Giáo dục<br>&amp; Đào tạo</strong></button>
+    <button class="industry-card" type="button" id="moreCategories"><span class="industry-emoji">▦</span><strong>Khác</strong></button>
+  </div>
+</section>
+<section id="workspace"><div class="section-head"><div><h2 id="pageTitle">Việc làm nổi bật</h2></div><span id="resultCount"></span></div>
+<div id="jobsView" class="listing"><aside><h3>Lọc công việc</h3><label>Hình thức<select id="type"><option value="">Tất cả</option><option>Toàn thời gian</option><option>Bán thời gian</option><option>Thực tập</option></select></label><label>Mức lương tối thiểu (triệu)<input id="salary" type="number" min="0" max="200" value="0"></label><label>Sắp xếp<select id="sort"><option value="new">Mới nhất</option><option value="salary">Lương cao nhất</option></select></label><button id="reset">Đặt lại bộ lọc</button><p class="muted">Một bước nhỏ hôm nay,<br>một cơ hội lớn ngày mai.</p></aside><div id="jobList"></div></div>
+<div id="applicationsView" hidden><label>Lọc trạng thái<select id="statusFilter"><option value="">Tất cả trạng thái</option></select></label><div id="applicationList"></div></div>
+<div id="cvView" hidden><div class="panel"><h3>CV của bạn</h3><p>Tải lên CV dạng PDF, dung lượng tối đa 5 MB.</p><label class="upload">Chọn file PDF<input type="file" id="cvInput" accept="application/pdf,.pdf"></label><div id="cvList"></div><p class="muted">Chế độ demo: CV lưu trong IndexedDB của trình duyệt, chưa gửi lên máy chủ.</p></div></div>
+<div id="portalView" hidden><div id="portalContent"></div></div>
+</section></main>
+<footer>JobConnect © 2026 <span>Kết nối tài năng. Mở lối tương lai.</span></footer>
+<dialog id="authDialog"><form id="authForm"><button type="button" class="close" data-close aria-label="Đóng">×</button><input type="hidden" id="authMode" value="login"><h2 id="authHeading">Chào mừng trở lại</h2><p id="authSubtitle">Đăng nhập để lưu việc làm và quản lý hồ sơ ứng tuyển.</p><div id="authFeedback" class="auth-feedback" role="status" aria-live="polite" hidden></div><label id="nameField" hidden>Họ tên<input id="name" maxlength="80" autocomplete="name"></label><label>Email<input id="email" type="email" required autocomplete="email"></label><label>Mật khẩu<div class="password-wrap"><input id="password" type="password" minlength="6" required autocomplete="current-password" placeholder="Tối thiểu 6 ký tự"><button type="button" class="eye" data-toggle-password="password" aria-label="Hiện mật khẩu" aria-pressed="false"><svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div></label><label id="confirmField" hidden>Xác nhận mật khẩu<div class="password-wrap"><input id="confirmPassword" type="password" autocomplete="new-password" placeholder="Nhập lại mật khẩu"><button type="button" class="eye" data-toggle-password="confirmPassword" aria-label="Hiện mật khẩu" aria-pressed="false"><svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div></label><p class="muted" id="authRoleNotice" hidden>Tài khoản đăng ký mới thuộc vai trò Ứng viên.</p><button id="submitAuth" class="primary">Đăng nhập</button><p class="auth-bottom">Chưa có tài khoản? <button id="authSwitch" type="button" class="plain-switch">Đăng ký ngay</button></p></form></dialog>
+<dialog id="detailDialog"><button class="close" data-close aria-label="Đóng">×</button><div id="detailBody"></div></dialog>
+<dialog id="applyDialog"><form id="applyForm"><button type="button" class="close" data-close aria-label="Đóng">×</button><h2>Nộp đơn ứng tuyển</h2><p id="applyTitle"></p><label>Chọn CV PDF<select id="cvSelect" required></select></label><label>Thư giới thiệu<textarea id="letter" rows="5" maxlength="3000" placeholder="Chia sẻ lý do bạn phù hợp…"></textarea></label><button class="primary">Gửi đơn ứng tuyển</button></form></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script><script src="portal.js"></script></body></html>
